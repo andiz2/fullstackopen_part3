@@ -116,6 +116,42 @@ app.delete('/api/persons/:id', (request, response) => {
       });
 })
 
+app.post('/api/persons', (request, response) => {
+  const maxId = Math.floor(Math.random() * 99999999)
+  //const person = request.body
+  //person.id = maxId
+  async function foo() {
+      const res = await fetch("http://localhost:3001/persons/") ;
+      const result = await res.json();
+      const miro = result;
+      console.log('miro',miro); // or use the result variable
+      return miro
+    }
+  const promiseDelete = foo().then(
+      function(value){
+        if(value){
+           const body = request.body
+           if (!body.name) {
+              return response.status(400).json({ 
+                error: 'content missing' 
+              })
+            }
+           const person = {
+              name: body.name,
+              number: body.number || false,
+              id: maxId
+           }
+           value = value.concat(person)
+           response.json(person)
+        }  else {
+          response.status(204).end()
+        }
+        //console.log('value', value)
+        //response.send(value)
+      });
+  //console.log('person', person)
+})
+
 
 
 const PORT = 3002
