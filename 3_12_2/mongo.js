@@ -12,7 +12,7 @@ const name = process.argv[3]
 const phoneNumber = process.argv[4]
 
 const url =
-  `mongodb+srv://test_fullstack:${password}@cluster0.obatlyn.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://test_fullstack:${password}@cluster0.obatlyn.mongodb.net/personApp?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -39,7 +39,7 @@ if (process.argv.length===3) {
 const person = new Person({
   name: name,
   phoneNumber: phoneNumber,
-  id: 12,
+  id: 16,
 })
 
 person.save().then(result => {
